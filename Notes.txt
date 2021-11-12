@@ -1,0 +1,104 @@
+Redux for state management(eg: whether a popup is open or closed)
+
+App.js is the root component in React
+
+The State stores all the properties and data related to the component and can be defined below the constructor.
+
+Props are a way to pass data from parent component to child component
+
+We can define the local data inside state in the App component and then pass them as props to the ninja component
+
+Components are of two types -> container components and UI components
+
+Container Components are the components which contain State. They don't have much to do with the UI. Classes are used to create Container Components
+
+UI Components don't contain State. They receive data from props.
+We use Functions to create UI Components instead of classes
+
+We can nest container components to a container component!
+
+UI Components are also called Functional components
+
+When we implement a functional component, props doesn't get automatically passed to it like the class component. We need to take those props in as a parameter and there is no need to use the 'this' keyword to access the props, as we are not creating an instance of the class there.
+In Simple words, 
+In Class based components, we use 'this' keyword to access props 
+In  Functional components we pass them as an argument and refer them directly
+
+When we don't want any function to fire up automatically, we can surround them by arrow function!
+
+Component lifecycle -> Mounting phase, updating phase and unmounting phase
+
+
+Methods during mounting stage -> 
+1)Constructor -> not necessary but offers an other way to set state
+2)getDerivedStateFromProps - >  enables a component to change its state when there is an updation of props
+3)render - > it is the only required component as this returns some form of JSX
+4)componentDidMount -> fires once a component gets nested to the DOM
+
+Methods during updation state 
+1)getDerivedStateFromProps
+2)shouldComponentUpdate -> This receives the next props and next state and we can compare the current props and state with the next ones. We can return False here if we want to prevent the component updating or re-rendering
+3)getSnapShortBeforeUpdate -> read access to the DOm before the changes are committed to it
+4)componentDidUpdate -> This is called after the template get added to the actual DOM. This is a good place to get external data from a database as we have write access to the DOM
+
+
+Methods during unmounting state
+1)componentWillUnmount 
+
+
+componentDidUpdate takes 'prevProps & prevState' as arguments
+
+Whenever we wanna delete something from the State array objects, remember to use 'filter' function
+
+React Router -> take for example you wanna navigate to the about page from the navbar component, insteading of sending HTTP Requests, the React Router dom handles the request and serves you with the About component
+
+Steps to implement react router
+npm install react-router-dom
+import {BrowserRouter,Route} from 'react-router-dom';
+
+Usage of Anchor tags within JSX files will result in making a server request each time. to Avoid those requests, we import Link,NavLink from React-router-dom
+import { Link, NavLink } from 'react-router-dom';
+and to usage of this is, instead of using <a href='/'>Home</a>, we can simply use, <Link to="/">Home</Link>
+
+
+Programmatic redirection for any subcomponent can be done using react router dom when the component is passed as props
+
+To pass those properties such as 'history,location,etc..we gotta make it as a Higher Order Component.
+and for that we need to import 
+import { withRouter} from 'react-router-dom'
+and export default withRouter(Navbar)
+In this way, the Navbar component will have those properties which are exported as props to the Navbar component itself
+
+
+Higher ORder Component -> can change the properties of some other component!
+withRouter is a higher order component, which super charged the navbar component to contain the information about the router inside the component
+
+When we want to make API request calls in React, we gotta make use of Axios - A React Library for making HTTP request calls
+npm install axios -> will install axios library
+
+Functional components cannot use lifecycle components
+
+the get method of axios doesn't happen synchronously. It takes some time to fetch the data from the API. We can make use of '.then()' method which actually runs only after the axios api fetch is completed.
+
+Route parameters
+similar to URL parameters(like we pass ID in the URL)
+
+the way we define a route parameter is by a colon, followed by the route parameter name
+
+In the below example, '/contact' is also treated as a post-id by React as those have the same structure.
+<Route path='/contact' component={Contact}/>
+<Route path='/:post_id' component={Post}/>
+Inorder to overcome this, we use Switchtag
+import { Switch } from 'react-router-dom'
+the 'Switch' makes sure that at any time, the Content depends on only one of the Routes to take precedence instead of matching two at a time
+
+To use an image inside a component, we gotta import that image
+
+Redux -> Central data store for all app data, any component can access those data from redux, makes state management easier
+
+Imagine a robot, a warehouse and you.  You want to add something to the Warehouse, but you are not allowed to do it yourself. You dispatch an action to the RObot with the things that needed to be added.
+The Robot then goes in and adds the thing. 
+In the above scenario, You are the component that wants to update the Central State, The Things you Dispatch are the payloads, The Robot is the Reducer which receives your actions and goes into the Central State and updates the data into the Warehouse(central state)
+
+
+
